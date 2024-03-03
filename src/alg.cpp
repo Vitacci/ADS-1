@@ -18,24 +18,24 @@ bool checkPrime(uint64_t value) {
 }
 
 uint64_t nPrime(uint64_t n) {
-  int cnt = 0;
-  int flag = 0;
-  for (uint64_t i = 2; i < 1000000; ++i) {
-    for (int j = 2; j < i; ++j) {
-      if (i % j == 0) {
-        flag = 1;
-        break;
-      }
+    if (n == 1) return 2;
+    uint64_t count = 1;
+    uint64_t num = 3;
+    while (count < n) {
+        bool isPrime = true;
+        for (uint64_t i = 2; i * i <= num; i++) {
+            if (num % i == 0) {
+                isPrime = false;
+                break;
+            }
+        }
+        if (isPrime) {
+            count++;
+            if (count == n) return num;
+        }
+        num += 2;
     }
-    if (flag == 0) {
-      cnt += 1;
-      if (cnt == n)
-        return i;
-    }
-    else
-      flag = 0;
-  }
-  return 0;
+    return 0;
 }
 
 uint64_t nextPrime(uint64_t value) {
